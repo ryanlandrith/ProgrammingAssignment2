@@ -26,17 +26,17 @@ makeCacheMatrix <- function(x = matrix()) {
 
 ## Return a matrix that is the inverse of 'x'
 
-cacheSolve <- function(z, ...) {
-    ## z is an object of type "makeCacheMatrix" i.e. it is a list of functions and contains 
+cacheSolve <- function(x, ...) {
+    ## x is an object of type "makeCacheMatrix" i.e. it is a list of functions and contains 
     #pointers all variables in that environment
-    inv <- z$getinv()
+    inv <- x$getinv()
     if (!is.null(inv)) {
         message("getting cached data")
         return(inv)
     }
-    data <- z$get()
+    data <- x$get()
     inv <-
         solve(data, ...)# This ... is passed from the function to specifiy solve options
-    z$setinv(inv)
+    x$setinv(inv)
     inv
 }
